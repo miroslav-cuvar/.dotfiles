@@ -1,0 +1,11 @@
+#! /bin/bash
+
+level=`light | cut -d'.' -f1`
+
+(( level=level-10 ))
+
+if [[ "$level" > 13 ]]; then
+	light -S "$level"
+else
+	light -S 10
+fi

@@ -1,0 +1,15 @@
+#! /bin/bash
+
+
+connected=(`xrandr | grep "\<connected\>" | cut -d' ' -f1`)
+listed=(`xrandr --listmonitors | tr -s ' ' | cut -d' ' -f'5' | tail +2`)
+
+if [ "${#connected[@]}" -ne "${#listed[@]}" ]; then
+	if [ "${#connected[@]}" -eq "2" ]; then
+		xrandr --output "${connected[1]}" --auto --output "${connected[0]}" --left-of "${connected[1]}"
+	else
+		xrandr --output "${connected[0]}" --auto --output "${listed[1]}" --off
+	fi	
+fi
+
+feh --bg-scale ~/.fehbgdir/bg.jpg

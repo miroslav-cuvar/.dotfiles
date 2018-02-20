@@ -1,0 +1,13 @@
+#! /bin/bash
+
+# wifi 
+
+connection=`nmcli | grep "wlp2s0:" | cut -d' ' -f2`
+
+if [[ $connection == "connected" ]]; then
+	echo -n `nmcli | grep "wlp2s0:" | cut -d' ' -f4`
+	echo -n " "
+	echo -n `nmcli dev wifi | grep "^*" | tr -s ' ' | cut -d' ' -f8`
+else
+	echo "Disconnected"
+fi

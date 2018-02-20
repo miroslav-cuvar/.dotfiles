@@ -1,0 +1,31 @@
+#! /bin/bash
+
+# plug	
+# full  
+# 3/4   
+# half  
+# 1/4   
+# empty 
+
+level=`acpi -b | cut -d',' -f2 | tr -cd "[0-9]"`
+charging=`acpi -b | cut -d',' -f1 | cut -d' ' -f3`
+glyph=""
+
+#level=$1
+
+if [[ "$charging" = "Charging" ]]; then
+	glyph=""
+elif [[ "$level" -gt "89" ]]; then
+	glyph=""
+elif [[ ("$level" -gt "63") && ("$level" -lt "90") ]]; then
+	glyph=""
+elif [[ "$level" -gt "36" && "$level" -lt "64" ]]; then
+	glyph=""
+elif [[ "$level" -gt "10" && "$level" -lt "37" ]]; then
+	glyph=""
+else
+	glyph=""
+fi
+
+echo "$glyph: $level%"
+
